@@ -19,3 +19,13 @@ In order to achieve our goal we exploited some algorithms and deep learning arch
  • YOLO v3: CNN architecture to perform the detection in images;
  • SIFT: algorithm to extract scale invariant features of objects, we used it to identify people in different frames; 
  • SORT: algorithm used to perform the tracking of pedestrians between frames.
+
+## 2.1.YOLO v3
+YOLO v3 is a Convolutional Neural Network which performs object segmentation inside an image. YOLO stands for You Only Look Once and is one of the faster detection methods available to this day, which is one of the reasons why we decided to use it. YOLO divides the input image into a grid of 7x7 cells. Within each grid cell it regress from the base boxes to a final box with 5 numbers that represents the confidence and the bounding box (dx, dy, dw, dh), and predicts scores for each classes, including the background as a class. The output is a volume of bounding boxes, score and confidence. 
+
+## 2.2.SIFT
+The SIFT (Scale invariant Feature Transform) function is a feature detector that solves the problem of matching features with       scaling, rotation and luminance. As shown in Figure 1, the algorithm allows to find points in common between two entities and, once A certain threshold is reached, determine if these are the same identity but in two different representations. 
+
+..................
+
+The algorithm is divided intoadetector part and a descriptor part. It starts from the creation of a space scale of images, usingthe Gaussian function and, after getting a progressively Gaussian blurred images, it calculates the Difference of Gaussian (DoG) pyramid of octaves, iterating the procedure [2]. 
