@@ -47,7 +47,7 @@ When objects enters or leave the scene, unique identifiers need to be created or
 ## 3. APPROACH
 As we mentioned before, we used two types of approaches that we will explain. The detection phase is in common for both of them and it’s done with YOLO.
 
-### 3.1 MULTIPLE CRITERIA TRACKING
+### 3.1 MULTIPLE CRITERIA TRACKING (MCT)
 The base of this algorithm is the use of a Person Class and the creation of a list of Person that will be updated with each new frame. The Person Class is made of: 
 * an Identifier;
 * a Bounding Box;
@@ -77,3 +77,52 @@ Detections are displayed as a colored bounding box around the person. Different 
 
 Figure 6
 
+## 3.2 SORT
+After the detection has been made, the list of objects detected with the surrounding bounding boxes and confidence are passed to the SORT algorithm. Applying all the steps explained in section 2.3, SORT searches for the best associations and outputs the list of identifiers that are currently detected and successfully associated to previous detections.
+
+It can be noted, also, that identities are appropriately mantained and assigned even when a subject has not been detected for a short amount of time.
+
+# 4. EXPERIMENTS AND RESULTS
+We quantitatively measured the performances of the two algorithms on two of the most complex videos we had available. The chosen metric is the Multiple Object Tracking Accuracy, MOTA in short, defined as:
+
+MOTA=---------------
+
+where fni, fpi and fai are, respectively, the number of misses, false positives and mismatches for i-th frame. GTi is the number of ground truth objects present at time i.
+
+For each frame, we examined those values and used them to finally calculate the MOTA for the two algorithms. The green and red colors in Table 1 represents which algorithm worked better or worse in the corresponding category.
+
+Qualitatively we abserved that SORT has a reduced number of false assignments, and does not produce false positives, since it is dependent on YOLO's detections. MCT, on the other hand, produced a lower number of false negatives, thanks to the attempts at prediction when detections are not provided by YOLO.
+
+It has to be said, though, that a different implementation of the SORT algorithm could be able to produce better results displaying its predictions and thus reducing the number of false negatives.
+
+---table 1
+link
+
+# 5. IMPROVEMENTS AND FUTURE WORKS
+Recently, a new algorithm has been proposed for Tracking-by-Detection based on SORT called DEEP-SORT [4]. This works performs better than SORT, but we thought that it’s heavier in terms of computation. Our aim is to provide a framework for real-time detection, YOLO is already heavy to run on a CPU. If the camera is connected to a dedicated server which runs the application on a GPU, then it could be possible to implement also DEEP-SORT.
+
+For MCT, it could be interesting to use Machine Learning algorithms to improve the voting phase, for example by assigning different weights to different criteria.
+
+A further consideration to improve the algorithm consists in modifying the criterion concerning ground points, to manage the cases in which YOLO detections do not identify the whole body, but only a part of it like the bust. In these cases, in fact, the Ground Point is in the wrong position with respect to reality. To improve this aspect, more information could be used from the Bounding Boxes.
+
+# 6.CONCLUSIONS
+Comparing the two algorithms we found that both are interesting Multiple Object Tracking. The implementation we have chosen for SORT manages to maintain the same id for the same person, but if in some frames there is no detection, the prediction is not shown on the screen. In contrast, MCT manages to reduce fn at the cost of increasing the fp with the prediction technique based on past ground points. This feature can be considered positive in the case of a video surveillance problem.
+
+# REFERENCES
+[1] github.com/eriklindernoren/PyTorch-YOLOv3
+[2] Wang, Guohui & Rister, Blaine & Cavallaro,
+Joseph. (2013). “Workload Analysis and Ef icient
+OpenCL-based Implementation of SIFT Algorithm
+on a Smartphone” 2013 IEEE Global Conference
+on Signal and Information Processing, GlobalSIP
+2013 - Proceedings.
+[3] A. Bewley, Z. Ge, L. Ott, F. Ramos and B.
+Upcroft, "Simple online and realtime tracking,"
+2016 IEEE International Conference on Image
+Processing (ICIP), Phoenix, AZ, 2016, pp.
+3464-3468.
+[4] N. Wojke, A. Bewley and D. Paulus, "Simple
+online and realtime tracking with a deep
+association metric," 2017 IEEE International
+Conference on Image Processing (ICIP), Beijing,
+2017, pp. 3645-3649.
