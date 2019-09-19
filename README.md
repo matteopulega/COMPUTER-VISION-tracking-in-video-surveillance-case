@@ -9,8 +9,8 @@
 6. References
 
 ## CO-WORKERS
-https://github.com/eMDi94
-https://github.com/damianocaprari
+* https://github.com/eMDi94 
+* https://github.com/damianocaprari
 
 # 1.INTRODUCTION
 The aim of our work is to detect and track people in a stream taken by a camera. For this we decided to use a Tracking-by-Detection pipeline: first we find the people in the scene, and then we perform the tracking between frames. We chose this approach because we saw that the frames had a good enough quality to allow us to recognize people inside the scene. Moreover, recent developments in Convolutional Neural Network allow to perform accurate detections of persons insidean image.
