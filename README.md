@@ -46,10 +46,10 @@ As we mentioned before, we used two types of approaches that we will explain. Th
 
 ### 3.1 MULTIPLE CRITERIA TRACKING
 The base of this algorithm is the use of a Person Class and the creation of a list of Person that will be updated with each new frame. The Person Class is made of: 
-*• an Identifier;
-*• a Bounding Box;
-*• a list of Ground Points that models the history of positions in the current and previous frames. A Ground Point is simply the midpoint of the lower side of the Bounding Box, that we assumed being the point of contact between the person and the ground; 
-*• a list of SIFT descriptors and keypoints.
+* an Identifier;
+* a Bounding Box;
+* a list of Ground Points that models the history of positions in the current and previous frames. A Ground Point is simply the midpoint of the lower side of the Bounding Box, that we assumed being the point of contact between the person and the ground; 
+* a list of SIFT descriptors and keypoints.
  For each frame, the algorithm analyzes every detection that YOLO provides. For each one of them a new Person is instantiated, then keypoints and descriptors are extracted from the area withing the Bounding Box using the SIFT algorithm. The figure 5 shows an example of such keypoints. 
  
  Figure 5
