@@ -113,19 +113,19 @@ A further consideration to improve the algorithm consists in modifying the crite
 Comparing the two algorithms we found that both are interesting Multiple Object Tracking. The implementation we have chosen for SORT manages to maintain the same id for the same person, but if in some frames there is no detection, the prediction is not shown on the screen. In contrast, MCT manages to reduce fn at the cost of increasing the fp with the prediction technique based on past ground points. This feature can be considered positive in the case of a video surveillance problem.
 
 # REFERENCES
-[1] github.com/eriklindernoren/PyTorch-YOLOv3
-[2] Wang, Guohui & Rister, Blaine & Cavallaro,
+* [1] github.com/eriklindernoren/PyTorch-YOLOv3
+* [2] Wang, Guohui & Rister, Blaine & Cavallaro,
 Joseph. (2013). “Workload Analysis and Ef icient
 OpenCL-based Implementation of SIFT Algorithm
 on a Smartphone” 2013 IEEE Global Conference
 on Signal and Information Processing, GlobalSIP
 2013 - Proceedings.
-[3] A. Bewley, Z. Ge, L. Ott, F. Ramos and B.
+* [3] A. Bewley, Z. Ge, L. Ott, F. Ramos and B.
 Upcroft, "Simple online and realtime tracking,"
 2016 IEEE International Conference on Image
 Processing (ICIP), Phoenix, AZ, 2016, pp.
 3464-3468.
-[4] N. Wojke, A. Bewley and D. Paulus, "Simple
+* [4] N. Wojke, A. Bewley and D. Paulus, "Simple
 online and realtime tracking with a deep
 association metric," 2017 IEEE International
 Conference on Image Processing (ICIP), Beijing,
