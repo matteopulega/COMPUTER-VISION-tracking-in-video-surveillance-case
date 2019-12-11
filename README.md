@@ -74,7 +74,7 @@ The base of this algorithm is the use of a Person Class and the creation of a li
 
 For each frame, the algorithm analyzes every detection that YOLO provides. For each one of them a new Person is instantiated, then keypoints and descriptors are extracted from the area withing the Bounding Box using the SIFT algorithm. The figure 5 shows an example of such keypoints. 
  
- Figure 5
+![GitHub Logo](/images_readme/p5.PNG)
  
  Once we have created a list of all the Persons found in the current frame, we need to compare them with the list of Persons coming from the previous frames: Old Persons.
 
@@ -93,19 +93,16 @@ If, for a given old person, there are no positive votes with any of the new dete
 
 Detections are displayed as a colored bounding box around the person. Different colors indicate different IDs. Bright colors indicate a real detection provided by YOLO, darker colors indicate a predicted detection.
 
-Figure 6
-
 ## 3.2 SORT
-After the detection has been made, the list of objects detected with the surrounding bounding boxes and confidence are passed to the SORT algorithm. Applying all the steps explained in section 2.3, SORT searches for the best associations and outputs the list of identifiers that are currently detected and successfully associated to previous detections.
-
+After the detection has been made, the list of objects detected with the surrounding bounding boxes and confidence are passed to the SORT algorithm. Applying all the steps explained in section 2.3, SORT searches for the best associations and outputs the list of identifiers that are currently detected and successfully associated to previous detections.\
 It can be noted, also, that identities are appropriately mantained and assigned even when a subject has not been detected for a short amount of time.
 
 # 4. EXPERIMENTS AND RESULTS
 We quantitatively measured the performances of the two algorithms on two of the most complex videos we had available. The chosen metric is the Multiple Object Tracking Accuracy, MOTA in short, defined as:
 
-MOTA=---------------
+MOTA = 1 - ((sum(fn + fp + fa) / sum(GT))
 
-where fni, fpi and fai are, respectively, the number of misses, false positives and mismatches for i-th frame. GTi is the number of ground truth objects present at time i.
+where fn, fp and fa are, respectively, the number of misses, false positives and mismatches for i-th frame. GTi is the number of ground truth objects present at time i.
 
 For each frame, we examined those values and used them to finally calculate the MOTA for the two algorithms. The green and red colors in Table 1 represents which algorithm worked better or worse in the corresponding category.
 
@@ -113,8 +110,7 @@ Qualitatively we abserved that SORT has a reduced number of false assignments, a
 
 It has to be said, though, that a different implementation of the SORT algorithm could be able to produce better results displaying its predictions and thus reducing the number of false negatives.
 
----table 1
-link
+![GitHub Logo](/images_readme/p6.PNG)
 
 # 5. IMPROVEMENTS AND FUTURE WORKS
 Recently, a new algorithm has been proposed for Tracking-by-Detection based on SORT called DEEP-SORT [4]. This works performs better than SORT, but we thought that it’s heavier in terms of computation. Our aim is to provide a framework for real-time detection, YOLO is already heavy to run on a CPU. If the camera is connected to a dedicated server which runs the application on a GPU, then it could be possible to implement also DEEP-SORT.
