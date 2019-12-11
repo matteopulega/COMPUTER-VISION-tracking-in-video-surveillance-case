@@ -25,21 +25,35 @@ In order to achieve our goal we exploited some algorithms and deep learning arch
 * SORT: algorithm used to perform the tracking of pedestrians between frames.
 
 ## 2.1.YOLO v3
-YOLO v3 is a Convolutional Neural Network which performs object segmentation inside an image. YOLO stands for You Only Look Once and is one of the faster detection methods available to this day, which is one of the reasons why we decided to use it. YOLO divides the input image into a grid of 7x7 cells. Within each grid cell it regress from the base boxes to a final box with 5 numbers that represents the confidence and the bounding box (dx, dy, dw, dh), and predicts scores for each classes, including the background as a class. The output is a volume of bounding boxes, score and confidence. 
+YOLO v3 is a Convolutional Neural Network which performs object segmentation inside an image. YOLO stands for You Only Look Once and is one of the faster detection methods available to this day, which is one of the reasons why we decided to use it.\
+YOLO divides the input image into a grid of 7x7 cells. Within each grid cell it regress from the base boxes to a final box with 5 numbers that represents the confidence and the bounding box (dx, dy, dw, dh), and predicts scores for each classes, including the background as a class. The output is a volume of bounding boxes, score and confidence. 
 
 ## 2.2.SIFT
-The SIFT (Scale invariant Feature Transform) function is a feature detector that solves the problem of matching features with      scaling, rotation and luminance. As shown in Figure 1, the algorithm allows to find points in common between two entities and, once A certain threshold is reached, determine if these are the same identity but in two different representations. 
+The SIFT (Scale invariant Feature Transform) function is a feature detector that solves the problem of matching features with      scaling, rotation and luminance. As shown in Figure 1, the algorithm allows to find points in common between two entities and, once A certain threshold is reached, determine if these are the same identity but in two different representations.\ 
 
-..................
+.................. figure1\
 
-The algorithm is divided intoadetector part and a descriptor part. It starts from the creation of a space scale of images, usingthe Gaussian function and, after getting a progressively Gaussian blurred images, it calculates the Difference of Gaussian (DoG) pyramid of octaves, iterating the procedure [2]. 
+The algorithm is divided intoadetector part and a descriptor part. It starts from the creation of a space scale of images, usingthe Gaussian function and, after getting a progressively Gaussian blurred images, it calculates the Difference of Gaussian (DoG) pyramid of octaves, iterating the procedure [2].\
 
+...figure 2\
+
+After that, the algorithm find the local extrema in this scale-space, the highest variation causes in fact a peak, analyzing the points of interest at each level of the scale of the DoG pyramid: to identify a keypoint candidate, each point is compared with its 8 neighbors. Subsequently, the candidate will be compared with the 9 neighbors of the level above and the one below: a pixel becomes a keypoint only if it is the local extrema in 3 adjacent levels.\
+
+....Figure 3\
+
+For each one of them, a histogram of local gradient direction around the feature points is calculated and finally a canonical orientation is assigned to the peak of the histogram. Each point thus represents the x, y coordinates of a 2D plane, the scale and orientation.\
+Than, the neighbors of the feature point is taken together with the gradient directions of them and quantize them in 8 possible directions, creating a 4x4 histogram array, thus obtaining the descriptors of the keypoints.\
+
+..figure 4\
+
+After obtaining the keypoints and their descriptors, it is possible to analyze two images and verify if they have more or fewer common keypoints to be able to associate them to the same entity, as shown in Figure 1.
 
 ## 2.3 SIMPLE ONLINE AND REAL-TIME TRACKING (SORT)
 SORT is an algorithm used to solve the problem of Multiple Objects Tracking (MOT) targeted to online and real-time tracking [3]. 
  The MOT problem can be viewed as a data association problem where the aim is to associate detections across frames in a video. 
  SORT assumes that the detection phase is robust since it does not perform any error correction. It focuses on efficient and reliable handling of common frame-to-frame associations. To handle motion prediction and data association it uses a Kalman Filter and the Hungarian algorithm. 
   The inter-frame displacement of each object is approximated using a linear constant velocity model which is indipendent from other objects and the camera motion. The state of each target is:
+  
 *   x = [u v s r ũ ṽ š ] 
 
 where u and v represent the horizontal and vertical pixel location of the center of the target, s represents the scale of the target’s bounding box, r represents the ratio of the target’s bounding box. When a detection is associated to a target, the detected bounding box is used to update the state of the target where the velocity components are solved optimally with a Kalman Filter. If no detection is associated to the target, its state is simply predicted without correction using the linear velocity model.
