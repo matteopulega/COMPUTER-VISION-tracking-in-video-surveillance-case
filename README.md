@@ -13,9 +13,9 @@
 * https://github.com/damianocaprari
 
 # 1.INTRODUCTION
-The aim of our work is to detect and track people in a stream taken by a camera. For this we decided to use a Tracking-by-Detection pipeline: first we find the people in the scene, and then we perform the tracking between frames. We chose this approach because we saw that the frames had a good enough quality to allow us to recognize people inside the scene. Moreover, recent developments in Convolutional Neural Network allow to perform accurate detections of persons insidean image.
-For the detection phase we chose to useYOLO v3 [1]. This CNN is trained over the COCO dataset and we employ it to performpedestrians detection.
-For the tracking phase we decided touse two approaches: Simple Online and Real-time Tracking, shortened in SORT, which is a tracking method based on the Kalman Filter with a constant velocity model, and an approach developed by us that we called Multiple Criteria Tracking, based on SIFT and on the trajectory of the pedestrians.
+The aim of our work is to detect and track people in a stream taken by a camera. For this we decided to use a Tracking-by-Detection pipeline: first we find the people in the scene, and then we perform the tracking between frames. We chose this approach because we saw that the frames had a good enough quality to allow us to recognize people inside the scene. Moreover, recent developments in Convolutional Neural Network allow to perform accurate detections of persons insidean image.\
+For the detection phase we chose to useYOLO v3 [1]. This CNN is trained over the COCO dataset and we employ it to performpedestrians detection.\
+For the tracking phase we decided touse two approaches: Simple Online and Real-time Tracking, shortened in SORT, which is a tracking method based on the Kalman Filter with a constant velocity model, and an approach developed by us that we called Multiple Criteria Tracking, based on SIFT and on the trajectory of the pedestrians.\
 We will also provide a comparison between those two approaches.
 
 # 2.RELATED WORKS
