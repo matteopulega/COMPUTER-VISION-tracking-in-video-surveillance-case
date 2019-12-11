@@ -33,18 +33,18 @@ The SIFT (Scale invariant Feature Transform) function is a feature detector that
 
 ![GitHub Logo](/images_readme/p1.PNG)
 
-The algorithm is divided intoadetector part and a descriptor part. It starts from the creation of a space scale of images, usingthe Gaussian function and, after getting a progressively Gaussian blurred images, it calculates the Difference of Gaussian (DoG) pyramid of octaves, iterating the procedure [2].\
+The algorithm is divided intoadetector part and a descriptor part. It starts from the creation of a space scale of images, usingthe Gaussian function and, after getting a progressively Gaussian blurred images, it calculates the Difference of Gaussian (DoG) pyramid of octaves, iterating the procedure [2].
 
-...figure 2\
+![GitHub Logo](/images_readme/p2.PNG)
 
-After that, the algorithm find the local extrema in this scale-space, the highest variation causes in fact a peak, analyzing the points of interest at each level of the scale of the DoG pyramid: to identify a keypoint candidate, each point is compared with its 8 neighbors. Subsequently, the candidate will be compared with the 9 neighbors of the level above and the one below: a pixel becomes a keypoint only if it is the local extrema in 3 adjacent levels.\
+After that, the algorithm find the local extrema in this scale-space, the highest variation causes in fact a peak, analyzing the points of interest at each level of the scale of the DoG pyramid: to identify a keypoint candidate, each point is compared with its 8 neighbors. Subsequently, the candidate will be compared with the 9 neighbors of the level above and the one below: a pixel becomes a keypoint only if it is the local extrema in 3 adjacent levels.
 
-....Figure 3\
+![GitHub Logo](/images_readme/p4.PNG)
 
 For each one of them, a histogram of local gradient direction around the feature points is calculated and finally a canonical orientation is assigned to the peak of the histogram. Each point thus represents the x, y coordinates of a 2D plane, the scale and orientation.\
-Than, the neighbors of the feature point is taken together with the gradient directions of them and quantize them in 8 possible directions, creating a 4x4 histogram array, thus obtaining the descriptors of the keypoints.\
+Than, the neighbors of the feature point is taken together with the gradient directions of them and quantize them in 8 possible directions, creating a 4x4 histogram array, thus obtaining the descriptors of the keypoints.
 
-..figure 4\
+![GitHub Logo](/images_readme/p3.PNG)
 
 After obtaining the keypoints and their descriptors, it is possible to analyze two images and verify if they have more or fewer common keypoints to be able to associate them to the same entity, as shown in Figure 1.
 
