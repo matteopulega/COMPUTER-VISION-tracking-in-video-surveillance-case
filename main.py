@@ -2,6 +2,7 @@ from tqdm import tqdm
 import numpy as np
 import cv2
 import torch
+# aggiunta una riga
 
 from common.data import VideoDataLoader
 from yolo_v3 import create_darknet_instance, rescale_boxes
@@ -34,6 +35,7 @@ def get_current_parameters():
 def main_sort(video_path, output_video):
     device, img_size, Tensor = get_current_parameters()
     device = torch.device(device)
+    
 
     loader = VideoDataLoader(video_path, img_size)
     net = create_darknet_instance(img_size, device, P.DARKNET.CONF_THS, P.DARKNET.NMS_THS)
@@ -67,7 +69,7 @@ def main_sort(video_path, output_video):
 *
 *
 *
-* DMM main implementation
+* DMM main implementations
 *
 *
 *
